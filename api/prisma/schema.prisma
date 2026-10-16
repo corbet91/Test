@@ -1,0 +1,36 @@
+// One table drives the whole dashboard: one row per day.
+//
+//   POS Revenue      -> posRevenue      (black bar)
+//   Eatclub Revenue  -> eatclubRevenue  (blue bar, stacked on POS)
+//   Direct Revenue   -> directRevenue   (grey bar in "Compare to Previous")
+//   Labour Costs     -> labourCost      (orange bar)
+//   Positive / Negative Event Impact -> positiveEvent / negativeEvent (green / red marker above the day)
+//   Total Covers card -> covers
+//   Total revenue = posRevenue + eatclubRevenue (computed, not stored)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Revenue {
+  id             String   @id @default(uuid())
+  date           DateTime @unique @db.Date
+  posRevenue     Decimal  @default(0) @db.Decimal(12, 2)
+  eatclubRevenue Decimal  @default(0) @db.Decimal(12, 2)
+  directRevenue  Decimal  @default(0) @db.Decimal(12, 2)
+  labourCost     Decimal  @default(0) @db.Decimal(12, 2)
+  covers         Int      @default(0)
+  /// Title of a positive event on that day (green marker). NULL = no marker.
+  positiveEvent  String?
+  /// Title of a negative event on that day (red marker). NULL = no marker.
+  negativeEvent  String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("revenue")
+}

@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 42 25% 95%; /* warm beige page */
+    --foreground: 0 0% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 12%;
+    --primary: 0 0% 16%; /* near-black buttons */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 18% 94%; /* KPI tiles */
+    --secondary-foreground: 0 0% 12%;
+    --muted: 40 18% 94%;
+    --muted-foreground: 0 0% 38%;
+    --accent: 45 93% 58%; /* yellow hover / highlight */
+    --accent-foreground: 0 0% 12%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 12% 88%;
+    --input: 40 10% 82%;
+    --ring: 45 93% 52%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
